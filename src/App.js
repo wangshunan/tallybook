@@ -3,6 +3,10 @@ import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Prilist from './components/PriceList'
+import ViewTab from './components/ViewTab'
+import {LIST_VIEW, CHART_VIEW} from './utility'
+import TotalPrice from './components/TotalPrice';
+import MonthPicker from './components/MonthPicker'
 
 const testItems = [
   {
@@ -13,7 +17,8 @@ const testItems = [
     "category": {
       "id": 1,
       "name": "旅行",
-      "type": "outcome"
+      "type": "outcome",
+      "iconName": "ios-plane"
     }
   },
   {
@@ -24,22 +29,34 @@ const testItems = [
     "category": {
       "id": 2,
       "name": "旅行",
-      "type": "outcome"
+      "type": "outcome",
+      "iconName": "ios-plane"
     }
   }
 ]
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+    <div>
+      <header>
       </header>
-      <Prilist
-          items={testItems}
-          onMordifyItem={(item) => {console.log(item.id)}}
-          onDeleteItem={() => {console.log('2')}}
+      <MonthPicker 
+        year={2020}
+        month={2}
       />
+      {/* <TotalPrice 
+        income={123}
+        outcome={456}
+      />
+      <ViewTab
+        activeTab={CHART_VIEW}
+        onTabChange={(tab) => {console.log(tab)}}
+      />
+      <Prilist
+        items={testItems}
+        onMordifyItem={(item) => {console.log(item.id)}}
+        onDeleteItem={() => {console.log('2')}}
+      /> */}
     </div>
   );
 }
