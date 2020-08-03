@@ -33,6 +33,7 @@ class MonthPicker extends React.Component {
             isOpen: false
         })
         document.removeEventListener('mouseup', this.handleClikeOutSide)
+        this.props.onChange({year: this.state.selectedYear, month: this.state.selectedMonth})
     }
 
     selecteYear = (e, yearNumber) => {
@@ -46,10 +47,9 @@ class MonthPicker extends React.Component {
         e.preventDefault()
         this.setState({
             selectedMonth: monthNumber
+        }, () => {
+            this.closeComponent()
         })
-
-        this.props.onChange(this.state.selectedYear, this.state.selectedMonth)
-        this.closeComponent()
     }
 
     render () {
@@ -60,12 +60,12 @@ class MonthPicker extends React.Component {
 
         return (
             <div className="dropdown">
+                <h4>选择月份</h4>
                 <button 
                 className="btn btn-lg btn-secondary dropdown-toggle"
                 onClick={this.toggleDropdown}
                 >
-                    选择月份
-                    <br></br>{`${this.state.selectedYear}年 ${padLeft(this.state.selectedMonth)}月`}
+                    {`${this.state.selectedYear}年 ${padLeft(this.state.selectedMonth)}月`}
                 </button>
                 { isOpen && 
                     <div className="dropdown-menu"  style={{display: 'block'}}>

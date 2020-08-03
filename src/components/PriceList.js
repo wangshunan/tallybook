@@ -2,12 +2,12 @@ import React from 'react'
 import Ionicon from 'react-ionicons'
 import PropTypes from 'prop-types'
 
-const PriceList = ({items, onMordifyItem, onDeleteItem}) => {
+const PriceList = ({items, onModifyItem, onDeleteItem}) => {
     return (
-        <ul className="list-group list-group-flush">
+        <ul className="list-group">
             {
                 items.map((item) => (
-                    <li className="list-group-item d-flex justify-content-between align-items-center row" key={item.id}>
+                    <li className="list-group-item d-flex justify-content-between align-items-center row" key={item.id} style={{margin:'0px'}}>
                         <span className="col-1 badege badege-primary">
                             <Ionicon
                                 className="rounded"
@@ -20,7 +20,7 @@ const PriceList = ({items, onMordifyItem, onDeleteItem}) => {
                         <span className="col-6">{item.title}</span>
                         <span className="col-1">{item.category.type === 'income'? '+' : '-' + item.price}</span>
                         <span className="col-2">{item.date}</span>
-                        <a className="col-1">
+                        <a className="col-1" onClick={(e) => {e.preventDefault(); onModifyItem(item.id)}}>
                             <Ionicon
                                 className="rounded"
                                 fontSize="30px"
@@ -29,7 +29,7 @@ const PriceList = ({items, onMordifyItem, onDeleteItem}) => {
                                 icon='ios-create-outline'
                             />
                         </a>
-                        <a className="col-1" onClick={onDeleteItem}>
+                        <a className="col-1" onClick={(e) => {e.preventDefault(); onDeleteItem(item.id)}}>
                             <Ionicon
                                 className="rounded"
                                 fontSize="30px"
