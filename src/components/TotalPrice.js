@@ -6,10 +6,10 @@ const TotalPrice = ({income, outcome}) => {
         <div className="container align-items-center mt-2">
             <div className="row">
                 <div className="col">
-                    <a>收入：{income}</a>
+                    <h5 className="income">收入：<span>{income}</span></h5>
                 </div>
                 <div className="col">
-                    <a>支出：{outcome}</a>
+                    <h5 className="outcome">支出：<span>{outcome}</span></h5>
                 </div>
             </div>
         </div>   

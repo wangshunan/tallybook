@@ -1,0 +1,180 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test PriceList component should render the component to match snapshot 1`] = `
+<ul
+  className="list-group"
+>
+  <li
+    className="list-group-item d-flex justify-content-between align-items-center row"
+    key="1"
+    style={
+      Object {
+        "margin": "0px",
+      }
+    }
+  >
+    <span
+      className="col-1 badege badege-primary"
+    >
+      <Ionicon
+        beat={false}
+        className="rounded"
+        color="#fff"
+        fontSize="30px"
+        icon="ios-plane"
+        rotate={false}
+        shake={false}
+        style={
+          Object {
+            "backgroundColor": "#007bff",
+            "padding": "5px",
+          }
+        }
+      />
+    </span>
+    <span
+      className="col-6"
+    >
+      test
+    </span>
+    <span
+      className="col-1"
+    >
+      -200
+    </span>
+    <span
+      className="col-2"
+    >
+      2020-07-10
+    </span>
+    <a
+      className="col-1"
+      onClick={[Function]}
+      role="button"
+    >
+      <Ionicon
+        beat={false}
+        className="rounded"
+        color="#fff"
+        fontSize="30px"
+        icon="ios-create-outline"
+        rotate={false}
+        shake={false}
+        style={
+          Object {
+            "backgroundColor": "#28a745",
+            "padding": "5px",
+          }
+        }
+      />
+    </a>
+    <a
+      className="col-1"
+      onClick={[Function]}
+      role="button"
+    >
+      <Ionicon
+        beat={false}
+        className="rounded"
+        color="#fff"
+        fontSize="30px"
+        icon="ios-close"
+        rotate={false}
+        shake={false}
+        style={
+          Object {
+            "backgroundColor": "#dc3545",
+            "padding": "5px",
+          }
+        }
+      />
+    </a>
+  </li>
+  <li
+    className="list-group-item d-flex justify-content-between align-items-center row"
+    key="2"
+    style={
+      Object {
+        "margin": "0px",
+      }
+    }
+  >
+    <span
+      className="col-1 badege badege-primary"
+    >
+      <Ionicon
+        beat={false}
+        className="rounded"
+        color="#fff"
+        fontSize="30px"
+        icon="ios-plane"
+        rotate={false}
+        shake={false}
+        style={
+          Object {
+            "backgroundColor": "#007bff",
+            "padding": "5px",
+          }
+        }
+      />
+    </span>
+    <span
+      className="col-6"
+    >
+      test
+    </span>
+    <span
+      className="col-1"
+    >
+      -200
+    </span>
+    <span
+      className="col-2"
+    >
+      2016-09-10
+    </span>
+    <a
+      className="col-1"
+      onClick={[Function]}
+      role="button"
+    >
+      <Ionicon
+        beat={false}
+        className="rounded"
+        color="#fff"
+        fontSize="30px"
+        icon="ios-create-outline"
+        rotate={false}
+        shake={false}
+        style={
+          Object {
+            "backgroundColor": "#28a745",
+            "padding": "5px",
+          }
+        }
+      />
+    </a>
+    <a
+      className="col-1"
+      onClick={[Function]}
+      role="button"
+    >
+      <Ionicon
+        beat={false}
+        className="rounded"
+        color="#fff"
+        fontSize="30px"
+        icon="ios-close"
+        rotate={false}
+        shake={false}
+        style={
+          Object {
+            "backgroundColor": "#dc3545",
+            "padding": "5px",
+          }
+        }
+      />
+    </a>
+  </li>
+</ul>
+`;

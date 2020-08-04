@@ -7,7 +7,7 @@ import TotalPrice from '../components/TotalPrice';
 import MonthPicker from '../components/MonthPicker'
 import CreateBtn from '../components/CreateBtn'
 
-const categoies = {
+export const categories = {
     "1": {
         "id": 1,
         "name": "旅行",
@@ -22,7 +22,7 @@ const categoies = {
     }
 }
 
-const testItems = [
+export const testItems = [
     {
       "id": 1,
       "title": "test",
@@ -53,15 +53,12 @@ const testItems = [
         this.setState({
             tabView: view
         })
-        console.log(view)
     }
 
     changeDate = (date) => {
         this.setState({
             currentDate: date
         })
-
-        console.log(date)
     }
 
     modifyItem = (id) => {
@@ -90,8 +87,6 @@ const testItems = [
         this.setState({
             items: [newItem, ...this.state.items]
         })
-
-        console.log(this.state.items)
     }
 
     deleteItem = (id) => {
@@ -105,7 +100,7 @@ const testItems = [
         let totalIncome = 0, totalOutcome = 0
         const { currentDate, items, tabView } = this.state
         const itemsWithCategory = items.map(item => {
-            item.category = categoies[item.cid]
+            item.category = categories[item.cid]
             return item
         }).filter(item => {
             return item.date.includes(`${currentDate.year}-${padLeft(currentDate.month)}`)

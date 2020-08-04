@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test MonthPiker component should render the component to match snapshot 1`] = `
+<MonthPicker
+  month={8}
+  onChange={[MockFunction]}
+  year={2018}
+>
+  <div
+    className="dropdown"
+  >
+    <h4>
+      选择月份
+    </h4>
+    <button
+      className="btn btn-lg btn-secondary dropdown-toggle"
+      onClick={[Function]}
+    >
+      2018年 08月
+    </button>
+  </div>
+</MonthPicker>
+`;

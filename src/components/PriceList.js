@@ -20,7 +20,7 @@ const PriceList = ({items, onModifyItem, onDeleteItem}) => {
                         <span className="col-6">{item.title}</span>
                         <span className="col-1">{item.category.type === 'income'? '+' : '-' + item.price}</span>
                         <span className="col-2">{item.date}</span>
-                        <a className="col-1" onClick={(e) => {e.preventDefault(); onModifyItem(item.id)}}>
+                        <a className="col-1" role="button" onClick={(e) => {e.preventDefault(); onModifyItem(item.id)}}>
                             <Ionicon
                                 className="rounded"
                                 fontSize="30px"
@@ -29,7 +29,7 @@ const PriceList = ({items, onModifyItem, onDeleteItem}) => {
                                 icon='ios-create-outline'
                             />
                         </a>
-                        <a className="col-1" onClick={(e) => {e.preventDefault(); onDeleteItem(item.id)}}>
+                        <a className="col-1" role="button" onClick={(e) => {e.preventDefault(); onDeleteItem(item.id)}}>
                             <Ionicon
                                 className="rounded"
                                 fontSize="30px"

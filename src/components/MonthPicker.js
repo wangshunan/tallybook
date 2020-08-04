@@ -14,10 +14,16 @@ class MonthPicker extends React.Component {
 
     toggleDropdown = (e) => {
         e.preventDefault()
-        this.setState({
-            isOpen: !this.state.isOpen
-        })
-        document.addEventListener('mouseup', this.handleClikeOutSide)
+
+        if ( !this.state.isOpen ) {
+            this.setState({
+                isOpen: true
+            })
+            // if the clicked element is not this element, then close the dropdown menu
+            document.addEventListener('mouseup', this.handleClikeOutSide)
+        } else {
+            this.closeComponent()
+        }
     }
 
     handleClikeOutSide = (e) => {
@@ -70,7 +76,7 @@ class MonthPicker extends React.Component {
                 { isOpen && 
                     <div className="dropdown-menu"  style={{display: 'block'}}>
                         <div className="row"> 
-                            <div className="col border-right ml-2"> 
+                            <div className="col border-right ml-2 years-range"> 
                             { yearRange.map((yearNumber, index) => 
                                 <a 
                                 className={ yearNumber === this.state.selectedYear ? "dropdown-item active" : "dropdown-item" } 
@@ -81,14 +87,14 @@ class MonthPicker extends React.Component {
                                 </a>
                             )}
                             </div>
-                            <div className="col mr-2"> 
+                            <div className="col mr-2 months-range"> 
                             { monthRange.map((monthNumber, index) => 
                                 <a 
                                 className={ monthNumber === this.state.selectedMonth ? "dropdown-item active" : "dropdown-item" } 
                                 herf="#" 
                                 key={index}
                                 onClick={(e) => {this.selecteMonth(e, monthNumber)}}>
-                                    {monthNumber} 月
+                                    {padLeft(monthNumber)} 月
                                 </a>
                             )}
                             </div>
