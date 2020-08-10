@@ -25,3 +25,31 @@ export const parseToYearAndMonth = (str) => {
         month: date.getMonth()
     }
 }
+
+export const inputItems = [
+    {
+        "title": "标题",
+        "type": "text",
+        "placeholder": "请输入标题"
+    },
+    {
+        "title": "金额",
+        "type": "number",
+        "placeholder": "请输入金额"
+    },
+    {
+        "title": "日期",
+        "type": "date",
+        "placeholder": ""
+    }
+]
+
+export const Colors = {
+    blue: '#347eff',
+    deepBlue: '#61dafb',
+    green: '#28a745',
+    red: '#dc3545',
+    gray: '#555',
+    lightGray: '#efefef',
+    white: '#fff'
+}

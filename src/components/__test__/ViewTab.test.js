@@ -2,7 +2,7 @@ import React from 'react'
 import {LIST_VIEW, CHART_VIEW} from '../../utility'
 import { shallow } from 'enzyme'
 import ViewTab from '../ViewTab'
-import toJson from 'enzyme-to-json';
+import toJson from 'enzyme-to-json'
 
 const props = {
     activeTab: LIST_VIEW,

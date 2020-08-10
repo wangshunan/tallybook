@@ -1,18 +1,18 @@
 import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import Prilist from './components/PriceList'
-import ViewTab from './components/ViewTab'
-import {LIST_VIEW, CHART_VIEW} from './utility'
-import TotalPrice from './components/TotalPrice';
-import MonthPicker from './components/MonthPicker'
 import Home from './containers/Home'
+import Create from './containers/Create'
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
 function App() {
   return (
-    <div>
-      <Home />
-    </div>
+    <Router>
+      <div>
+        <Route path="/" exact component={Home}></Route>
+        <Route path="/create" component={Create}></Route>
+      </div>
+    </Router>
   );
 }
 
