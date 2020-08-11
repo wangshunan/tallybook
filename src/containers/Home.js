@@ -1,11 +1,12 @@
 import React from 'react';
+import Ionicon from 'react-ionicons'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Prilist from '../components/PriceList'
-import ViewTab from '../components/ViewTab'
 import {LIST_VIEW, CHART_VIEW, TYPE_INCOME, TYPE_OUTCOME, parseToYearAndMonth, padLeft} from '../utility'
 import TotalPrice from '../components/TotalPrice';
 import MonthPicker from '../components/MonthPicker'
 import CreateBtn from '../components/CreateBtn'
+import { Tabs, Tab } from '../components/Tabs'
 
 export const categories = {
     "1": {
@@ -38,20 +39,24 @@ export const testItems = [
       "cid": 2
     }
 ]
+const TAB_TEXT = [
+    LIST_VIEW,
+    CHART_VIEW
+]
 
-  class Home extends React.Component {
+class Home extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             items: testItems,
             currentDate:parseToYearAndMonth(),
-            tabView: LIST_VIEW
+            tabView: TAB_TEXT[0]
         }
     }
 
-    changeView = (view) => {
+    changeView = (index) => {
         this.setState({
-            tabView: view
+            tabView: TAB_TEXT[index]
         })
     }
 
@@ -132,29 +137,45 @@ export const testItems = [
                     </div>
                 </div>
                 <div className="content-area py-3 px-3">
-                    <ViewTab
-                        activeTab={tabView}
-                        onTabChange={this.changeView}
-                    />
+                    <Tabs activeIndex={0} onTabChange={this.changeView}>
+                        <Tab>
+                            <Ionicon
+                                className="rounded mr-2"
+                                fontSize="25px"
+                                color={'#007bff'}
+                                icon='ios-paper'
+                            />
+                            List
+                        </Tab>
+                        <Tab>
+                            <Ionicon
+                                className="rounded ml-2"
+                                fontSize="25px"
+                                color={'#007bff'}
+                                icon='ios-pie'
+                            />
+                            Chart
+                        </Tab>
+                    </Tabs>
                     <CreateBtn
                         btnName="创建一条新的记账记录"
                         iconName="md-add"
                         callBack={this.createItem}
                     />
-                    { tabView === LIST_VIEW &&
+                    { tabView === TAB_TEXT[0] &&
                         <Prilist
                             items={itemsWithCategory}
                             onModifyItem={this.modifyItem}
                             onDeleteItem={this.deleteItem}
                         />
                     }
-                    { tabView === CHART_VIEW &&
+                    { tabView === TAB_TEXT[1] &&
                         <h1>图表模式</h1>
                     }
                 </div>
             </React.Fragment>
         )
     }
-  }
+}
 
   export default Home

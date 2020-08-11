@@ -1,8 +1,13 @@
+import React from 'react'
+
 export const LIST_VIEW = 'list'
 export const CHART_VIEW = 'chart'
 export const TYPE_INCOME = 'income'
 export const TYPE_OUTCOME = 'outcome'
 
+export const $ = (id) => {
+    return document.getElementById(id)
+}
 
 export const padLeft = (n) => {
     return n < 10 ? '0' + n : n

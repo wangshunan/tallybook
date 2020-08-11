@@ -1,9 +1,7 @@
 import React from 'react'
-import CreateBtn from '../components/CreateBtn'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import CategorySelect from '../components/CategorySelect'
 import PriceForm from '../components/PriceForm'
-import { inputItems } from '../utility'
 import { testItems } from './Home'
 
 const categories = [
@@ -41,7 +39,8 @@ const Create = () => {
             </div>
             <div className="py-3">
                 <PriceForm
-                    onFormSubmit={() => {}}
+                    item={testItems[0]}
+                    onFormSubmit={(data, isNew) => {console.log(data); console.log(isNew)}}
                     onCancelSubmit={() => {}}
                 />
             </div>
