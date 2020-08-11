@@ -67,24 +67,24 @@ class PriceForm extends React.Component{
         return(
             <form>
                 <div className="form-group">
-                    <label>标题</label>
+                    <label>标题 *</label>
                     <input defaultValue={title ? title : ''} type="text" id="form-title" className="form-control"/>
-                    <small id="title-err" className="form-text text-muted input-err">
-                        <p className="text-danger mb-0">{ !titleCheck && "请输入正确标题"}</p>
+                    <small id="title-err" className="form-text text-danger input-err">
+                        { !titleCheck && "请输入正确标题" }
                     </small>
                 </div>
                 <div className="form-group">
-                    <label>金额</label>
+                    <label>金额 *</label>
                     <input defaultValue={price ? price : undefined} type="number" id="form-price" className="form-control"/>
-                    <small id="price-err" className="form-text text-muted input-err">
-                        <p className="text-danger mb-0">{ !priceCheck && "请输入正确金额"}</p>
+                    <small id="price-err" className="form-text text-danger input-err">
+                        { !priceCheck && "请输入正确金额" }
                     </small>
                 </div>
                 <div className="form-group">
                     <label htmlFor="date">日期 *</label>
                     <input defaultValue={date ? date : null} type="date" id="form-date" className="form-control"/>
-                    <small id="date-err" className="form-text text-muted text-danger input-err">
-                        <p className="text-danger mb-0">{ !dateCheck && "请输入日期"}</p>
+                    <small id="date-err" className="form-text text-danger input-err">
+                        { !dateCheck && "请输入日期" }
                     </small>
                 </div>
                 <div className="button-group justify-content-end">

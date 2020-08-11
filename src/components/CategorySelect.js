@@ -22,7 +22,7 @@ class CategorySelect extends React.Component {
     render() {
         const { categories, onSelectCategory } = this.props
         return (
-            <div className="container category-select-component">
+            <div className="container category-select-component mb-4">
                 <div className="row">
                     {
                         categories.map((category, index) => {
@@ -35,7 +35,7 @@ class CategorySelect extends React.Component {
                                 <div className={activeClassName} key={index} onClick={() => {this.setSelectedCategory(category.id)}}>
                                     <Ionicon
                                         className="rounded-circle border border-primary"
-                                        fontSize="30px"
+                                        fontSize="50px"
                                         style={{ backgroundColor: backColor, padding: '5px' }} 
                                         color={iconColor}
                                         icon={category.iconName}
