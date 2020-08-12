@@ -31,23 +31,12 @@ export const parseToYearAndMonth = (str) => {
     }
 }
 
-export const inputItems = [
-    {
-        "title": "标题",
-        "type": "text",
-        "placeholder": "请输入标题"
-    },
-    {
-        "title": "金额",
-        "type": "number",
-        "placeholder": "请输入金额"
-    },
-    {
-        "title": "日期",
-        "type": "date",
-        "placeholder": ""
-    }
-]
+export const flatternArr = (arr) => {
+    return arr.reduce((map, item) => {
+        map[item.id] = item
+        return map
+    }, {})
+}
 
 export const Colors = {
     blue: '#347eff',

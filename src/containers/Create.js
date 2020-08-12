@@ -5,6 +5,7 @@ import { Tabs, Tab } from '../components/Tabs'
 import PriceForm from '../components/PriceForm'
 import { testItems } from './Home'
 import Ionicon from 'react-ionicons'
+import WithContext from '../WithContext'
 
 const categories = [
     {
@@ -30,40 +31,46 @@ const categories = [
     }
 ]
 
-const Create = () => {
-    return (
-        <div className="container py-3 px-5 align-items-center">
-            <Tabs activeIndex={0} onTabChange={() => {}}>
-                <Tab>
-                    <Ionicon
-                        className="rounded mr-2"
-                        fontSize="25px"
-                        color={'#007bff'}
-                        icon='ios-paper'
-                    />
-                    income
-                </Tab>
-                <Tab>
-                    <Ionicon
-                        className="rounded mr-2"
-                        fontSize="25px"
-                        color={'#007bff'}
-                        icon='ios-paper'
-                    />
-                    outcome
-                </Tab>
-            </Tabs>
-                <CategorySelect
-                    categories={categories}
-                    onSelectCategory={(id) => {console.log(id)}}
-            />
-            <PriceForm
-                item={testItems[0]}
-                onFormSubmit={(data, isNew) => {console.log(data); console.log(isNew)}}
-                onCancelSubmit={() => {}}
-            />
-        </div>
-    )
+class Create extends React.Component {
+    constructor(props) {
+        super(props)
+    }
+    render() {
+        console.log(this.props.data)
+        return (
+            <div className="container py-3 px-5 align-items-center">
+                <Tabs activeIndex={0} onTabChange={() => {}}>
+                    <Tab>
+                        <Ionicon
+                            className="rounded mr-2"
+                            fontSize="25px"
+                            color={'#007bff'}
+                            icon='ios-paper'
+                        />
+                        income
+                    </Tab>
+                    <Tab>
+                        <Ionicon
+                            className="rounded mr-2"
+                            fontSize="25px"
+                            color={'#007bff'}
+                            icon='ios-paper'
+                        />
+                        outcome
+                    </Tab>
+                </Tabs>
+                    <CategorySelect
+                        categories={categories}
+                        onSelectCategory={(id) => {console.log(id)}}
+                />
+                <PriceForm
+                    item={testItems[0]}
+                    onFormSubmit={(data, isNew) => {console.log(data); console.log(isNew)}}
+                    onCancelSubmit={() => {}}
+                />
+            </div>
+        )
+    }
 }
 
-export default Create
+export default WithContext(Create)

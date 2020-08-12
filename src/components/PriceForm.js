@@ -77,7 +77,7 @@ class PriceForm extends React.Component{
                     <label>金额 *</label>
                     <input defaultValue={price ? price : undefined} type="number" id="form-price" className="form-control"/>
                     <small id="price-err" className="form-text text-danger input-err">
-                        { !priceCheck && "请输入正确金额" }
+                        { !priceCheck && "请输入大于0的金额" }
                     </small>
                 </div>
                 <div className="form-group">

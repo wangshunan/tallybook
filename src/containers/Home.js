@@ -1,4 +1,5 @@
-import React from 'react';
+import React from 'react'
+import WithContext from '../WithContext'
 import Ionicon from 'react-ionicons'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Prilist from '../components/PriceList'
@@ -178,4 +179,4 @@ class Home extends React.Component {
     }
 }
 
-  export default Home
+  export default WithContext(Home)
