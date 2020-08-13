@@ -6,71 +6,71 @@ import PriceForm from '../components/PriceForm'
 import { testItems } from './Home'
 import Ionicon from 'react-ionicons'
 import WithContext from '../WithContext'
+import { withRouter } from 'react-router-dom'
+import { TAB_TEXT, TYPE_OUTCOME, TYPE_INCOME } from '../utility'
 
-const categories = [
-    {
-        "id": 1,
-        "name": "旅行",
-        "type": "outcome",
-        "iconName": "ios-plane",
-        "isActive": false
-    },
-    {
-        "id": 2,
-        "name": "理财",
-        "type": "income",
-        "iconName": "logo-yen",
-        "isActive": true
-    },
-    {
-        "id": 3,
-        "name": "理财",
-        "type": "outcome",
-        "iconName": "logo-yen",
-        "isActive": false
-    }
-]
-
+const tabsText = [TYPE_OUTCOME, TYPE_INCOME]
 class Create extends React.Component {
     constructor(props) {
         super(props)
+        this.state = {
+            selectedTab: TYPE_OUTCOME,
+            selectedCategory: null
+        }
     }
+
+    tabChange = (index) => {
+        this.setState({
+            selectedTab: tabsText[index]
+        })
+    }
+
+    submitFrom = (data, editMode) => {
+        this.props.actions.createItem(data, this.state.selectedCategory.id)
+        console.log(data)
+        this.props.history.push('/')
+    }
+
+    cancelSubmit = () => {
+        this.props.history.push('/')
+    }
+
     render() {
-        console.log(this.props.data)
+        const { data } = this.props
+        const { items, categories } = data
+        const { selectedTab, selectedCategory } = this.state
+        const { id } = this.props.match.params
+        const editItem = (id && items[id]) ? items[id] : {}
+        const filterCategories = Object.keys(categories)
+              .map(id => {
+                  if (categories[id].type === selectedTab) {
+                      return categories[id]
+                  }
+                }).filter((e) => {return e})
+
         return (
             <div className="container py-3 px-5 align-items-center">
-                <Tabs activeIndex={0} onTabChange={() => {}}>
+                <Tabs activeIndex={0} onTabChange={this.tabChange}>
                     <Tab>
-                        <Ionicon
-                            className="rounded mr-2"
-                            fontSize="25px"
-                            color={'#007bff'}
-                            icon='ios-paper'
-                        />
                         income
                     </Tab>
                     <Tab>
-                        <Ionicon
-                            className="rounded mr-2"
-                            fontSize="25px"
-                            color={'#007bff'}
-                            icon='ios-paper'
-                        />
                         outcome
                     </Tab>
                 </Tabs>
-                    <CategorySelect
-                        categories={categories}
-                        onSelectCategory={(id) => {console.log(id)}}
+                <CategorySelect
+                    categories={filterCategories}
+                    onSelectCategory={(category) => {this.setState({selectedCategory: category})}}
+                    selectedCategory={selectedCategory}
                 />
                 <PriceForm
-                    item={testItems[0]}
-                    onFormSubmit={(data, isNew) => {console.log(data); console.log(isNew)}}
-                    onCancelSubmit={() => {}}
+                    item={editItem}
+                    onFormSubmit={this.submitFrom}
+                    onCancelSubmit={this.cancelSubmit}
                 />
             </div>
         )
     }
 }
 
-export default WithContext(Create)
+export default withRouter(WithContext(Create))

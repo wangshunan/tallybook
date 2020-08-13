@@ -6,40 +6,36 @@ import { Colors } from '../utility'
 class CategorySelect extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {
-            selectedCategoryId: props.categories.filter(category => category.isActive === true)[0].id
-        }
     }
 
-    setSelectedCategory = (id) => {
-        this.setState({
-            selectedCategoryId: id
-        }, () => {
-            this.props.onSelectCategory(this.state.selectedCategoryId)
-        })
+    setSelectedCategory = (e, category) => {
+        e.preventDefault()
+        this.props.onSelectCategory(category)
     }
 
     render() {
-        const { categories, onSelectCategory } = this.props
+        const { categories, selectedCategory } = this.props
+        const selectedCategoryId = selectedCategory && selectedCategory.id
         return (
             <div className="container category-select-component mb-4">
                 <div className="row">
                     {
                         categories.map((category, index) => {
-                            const iconColor = (category.id === this.state.selectedCategoryId) ? Colors.white : Colors.gray
-                            const backColor = (category.id === this.state.selectedCategoryId) ? Colors.blue : Colors.lightGray
-                            const activeClassName = category.isActive ? 
-                            'category-item col align-self-center active' : 'category-item col align-self-center'
-
+                            const iconColor = (category.id === selectedCategoryId) ? Colors.white : Colors.gray
+                            const backColor = (category.id === selectedCategoryId) ? Colors.blue : Colors.lightGray
+                            const activeClassName = (selectedCategoryId === category.id) ? 
+                            'category-item col-3 active' : 'category-item col-3'
                             return (
-                                <div className={activeClassName} key={index} onClick={() => {this.setSelectedCategory(category.id)}}>
+                                <div className={activeClassName} key={index} style={{ textAlign: 'center'}}>
                                     <Ionicon
-                                        className="rounded-circle border border-primary"
+                                        className="rounded-circle"
                                         fontSize="50px"
-                                        style={{ backgroundColor: backColor, padding: '5px' }} 
+                                        style={{ backgroundColor: backColor, padding: "5px", cursor: "pointer" }}
                                         color={iconColor}
                                         icon={category.iconName}
+                                        onClick={(e) => {this.setSelectedCategory(e,category)}}
                                     />
+                                    <p>{category.name}</p>
                                 </div>
                             )
                         })

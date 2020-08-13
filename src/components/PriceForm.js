@@ -24,7 +24,7 @@ class PriceForm extends React.Component{
     }
 
 
-    onFormSubmit = (e) => {
+    formSubmit = (e) => {
         e.preventDefault()
         const { onFormSubmit, item } = this.props
         const title = $('form-title').value.trim()
@@ -88,8 +88,8 @@ class PriceForm extends React.Component{
                     </small>
                 </div>
                 <div className="button-group justify-content-end">
-                    <button type="submit" className="btn btn-primary mr-4" onClick={this.onFormSubmit}>Submit</button>
-                    <button type="submit" className="btn btn-secondary" onClick={() => {this.props.onCancelSubmit()}}>Cancel</button>
+                    <button type="submit" className="btn btn-primary mr-4" onClick={this.formSubmit}>Submit</button>
+                    <button type="submit" className="btn btn-secondary" onClick={this.props.onCancelSubmit}>Cancel</button>
                 </div>
             </form>
         )

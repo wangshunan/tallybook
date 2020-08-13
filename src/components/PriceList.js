@@ -18,7 +18,7 @@ const PriceList = ({items, onModifyItem, onDeleteItem}) => {
                             />
                         </span>
                         <span className="col-6">{item.title}</span>
-                        <span className="col-1">{item.category.type === 'income'? '+' : '-' + item.price}</span>
+                        <span className="col-1">{(item.category.type === 'income'? '+' : '-') + item.price}</span>
                         <span className="col-2">{item.date}</span>
                         <a className="col-1" role="button" onClick={(e) => {e.preventDefault(); onModifyItem(item.id)}}>
                             <Ionicon

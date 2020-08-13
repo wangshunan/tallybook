@@ -3,7 +3,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Home from './containers/Home'
 import Create from './containers/Create'
-import { flatternArr } from './utility'
+import { flatternArr, ID, parseToYearAndMonth } from './utility'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import { testItems, testCategories } from './testData'
 
@@ -15,17 +15,41 @@ class App extends Component {
       items: flatternArr(testItems),
       categories: flatternArr(testCategories)
     }
+
+    this.actions = {
+      deleteItem: (id) => {
+        delete this.state.items[id]
+        this.setState({
+          items: this.state.items
+        })
+      },
+      createItem: (data, categoryId) => {
+        const newId = ID()
+        const parsedDate = parseToYearAndMonth(data.date)
+        const category = this.state.categories[categoryId]
+        data.monthCategory = `${parsedDate.year}-${parsedDate.month}`
+        data.timestamp = new Date(data.date).getTime()
+        const newItem = { ...data, id: newId, cid: categoryId, category }
+        this.setState({
+          items: { ...this.state.items, [newId]: newItem }
+        }, () => {
+          console.log(this.state.items)
+        })
+      }
+    }
   }
   
   render() {
     return (
       <AppContext.Provider value={{
-        state: this.state
+        state: this.state,
+        actions: this.actions
       }}>
         <Router>
           <div>
             <Route path="/" exact component={Home}></Route>
             <Route path="/create" component={Create}></Route>
+            <Route path="/edit/:id" component={Create}></Route>
           </div>
         </Router>
       </AppContext.Provider>

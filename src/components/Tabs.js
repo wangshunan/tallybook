@@ -27,9 +27,10 @@ export class Tabs extends React.Component {
                     return (
                         <li className="nav-item">
                             <a                     
-                            href="#"
-                            className={activeClassName}
-                            onClick={(e) => {this.tabChange(e, index)}}
+                                href="#"
+                                className={activeClassName}
+                                onClick={(e) => {this.tabChange(e, index)}}
+                                role="button"
                             >
                                 {children}
                             </a>

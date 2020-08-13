@@ -3,11 +3,12 @@ import WithContext from '../WithContext'
 import Ionicon from 'react-ionicons'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Prilist from '../components/PriceList'
-import {LIST_VIEW, CHART_VIEW, TYPE_INCOME, TYPE_OUTCOME, parseToYearAndMonth, padLeft} from '../utility'
+import {TAB_TEXT, TYPE_INCOME, TYPE_OUTCOME, parseToYearAndMonth, padLeft} from '../utility'
 import TotalPrice from '../components/TotalPrice';
 import MonthPicker from '../components/MonthPicker'
 import CreateBtn from '../components/CreateBtn'
 import { Tabs, Tab } from '../components/Tabs'
+import { withRouter } from 'react-router-dom'
 
 export const categories = {
     "1": {
@@ -40,10 +41,7 @@ export const testItems = [
       "cid": 2
     }
 ]
-const TAB_TEXT = [
-    LIST_VIEW,
-    CHART_VIEW
-]
+
 
 class Home extends React.Component {
     constructor(props) {
@@ -68,46 +66,25 @@ class Home extends React.Component {
     }
 
     modifyItem = (id) => {
-        const modifiedItems = this.state.items.map(item => {
-            if ( id === item.id ) {
-                return {...item, title:'test2'}
-            } else {
-                return item
-            }
-        })
-
-        this.setState({
-            items: modifiedItems
-        })
+        this.props.history.push(`/edit/${id}`)
     }
 
     createItem = () => {
-        const newItem = {
-            "id": 3,
-            "title": "test",
-            "price": 500,
-            "date": "2018-08-10",
-            "cid": 1
-        }
-
-        this.setState({
-            items: [newItem, ...this.state.items]
-        })
+        this.props.history.push('/create')
     }
 
     deleteItem = (id) => {
-        const newItems = this.state.items.filter(item => item.id !== id)
-        this.setState({
-            items: newItems
-        })
+        this.props.actions.deleteItem(id)
     }
 
     render() {
         let totalIncome = 0, totalOutcome = 0
-        const { currentDate, items, tabView } = this.state
-        const itemsWithCategory = items.map(item => {
-            item.category = categories[item.cid]
-            return item
+        const { data } = this.props
+        const { items, categories } = data
+        const { currentDate, tabView } = this.state
+        const itemsWithCategory = Object.keys(items).map(id => {
+            items[id].category = categories[items[id].cid]
+            return items[id]
         }).filter(item => {
             return item.date.includes(`${currentDate.year}-${padLeft(currentDate.month)}`)
         })
@@ -173,10 +150,15 @@ class Home extends React.Component {
                     { tabView === TAB_TEXT[1] &&
                         <h1>图表模式</h1>
                     }
+                    { tabView === TAB_TEXT[0] && itemsWithCategory.length === 0 &&
+                        <div className="alert alert-light text-center no-record">
+                            您还没有任何记账记录
+                        </div>
+                    }
                 </div>
             </React.Fragment>
         )
     }
 }
 
-  export default WithContext(Home)
+  export default withRouter(WithContext(Home))

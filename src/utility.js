@@ -4,6 +4,7 @@ export const LIST_VIEW = 'list'
 export const CHART_VIEW = 'chart'
 export const TYPE_INCOME = 'income'
 export const TYPE_OUTCOME = 'outcome'
+export const TAB_TEXT = [LIST_VIEW, CHART_VIEW]
 
 export const $ = (id) => {
     return document.getElementById(id)
@@ -22,15 +23,6 @@ export const range = (size, startAt = 0) => {
     return arr
 }
 
-export const parseToYearAndMonth = (str) => {
-    const date = str ? new Date(str) : new Date()
-
-    return {
-        year: date.getFullYear(),
-        month: date.getMonth()
-    }
-}
-
 export const flatternArr = (arr) => {
     return arr.reduce((map, item) => {
         map[item.id] = item
@@ -46,4 +38,19 @@ export const Colors = {
     gray: '#555',
     lightGray: '#efefef',
     white: '#fff'
+}
+
+export const ID = () => {
+    // Math.random should be unique because of its seeding algorithm.
+    // Convert it to base 36 (numbers + letters), and grab the first 9 characters
+    // after the decimal.
+    return '_' + Math.random().toString(36).substr(2, 9);
+}
+
+export const parseToYearAndMonth = (str) => {
+    const date = str ? new Date(str) : new Date()
+    return {
+        year: date.getFullYear(),
+        month: date.getMonth() + 1,
+    }
 }
