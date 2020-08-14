@@ -3,51 +3,17 @@ import WithContext from '../WithContext'
 import Ionicon from 'react-ionicons'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Prilist from '../components/PriceList'
-import {TAB_TEXT, TYPE_INCOME, TYPE_OUTCOME, parseToYearAndMonth, padLeft} from '../utility'
+import {TAB_TEXT, TYPE_INCOME, parseToYearAndMonth, padLeft} from '../utility'
 import TotalPrice from '../components/TotalPrice';
 import MonthPicker from '../components/MonthPicker'
 import CreateBtn from '../components/CreateBtn'
 import { Tabs, Tab } from '../components/Tabs'
 import { withRouter } from 'react-router-dom'
 
-export const categories = {
-    "1": {
-        "id": 1,
-        "name": "旅行",
-        "type": TYPE_OUTCOME,
-        "iconName": "ios-plane"
-    },
-    "2": {
-        "id": 2,
-        "name": "旅行",
-        "type": TYPE_OUTCOME,
-        "iconName": "ios-plane"
-    }
-}
-
-export const testItems = [
-    {
-      "id": 1,
-      "title": "test",
-      "price": 200,
-      "date": "2020-07-10",
-      "cid": 1
-    },
-    {
-      "id": 2,
-      "title": "test",
-      "price": 200,
-      "date": "2016-09-10",
-      "cid": 2
-    }
-]
-
-
 class Home extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            items: testItems,
             currentDate:parseToYearAndMonth(),
             tabView: TAB_TEXT[0]
         }

@@ -107,4 +107,10 @@ class MonthPicker extends React.Component {
     }
 }
 
+MonthPicker.propTypes = {
+    year: PropTypes.number.isRequired,
+    month: PropTypes.number.isRequired,
+    onChange: PropTypes.func.isRequired,
+}
+
 export default MonthPicker

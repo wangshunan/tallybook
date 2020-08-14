@@ -3,19 +3,19 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import CategorySelect from '../components/CategorySelect'
 import { Tabs, Tab } from '../components/Tabs'
 import PriceForm from '../components/PriceForm'
-import { testItems } from './Home'
-import Ionicon from 'react-ionicons'
 import WithContext from '../WithContext'
 import { withRouter } from 'react-router-dom'
-import { TAB_TEXT, TYPE_OUTCOME, TYPE_INCOME } from '../utility'
+import { TYPE_OUTCOME, TYPE_INCOME } from '../utility'
 
 const tabsText = [TYPE_OUTCOME, TYPE_INCOME]
 class Create extends React.Component {
     constructor(props) {
         super(props)
+        const { id } = props.match.params
+        const { categories, items } = props.data
         this.state = {
-            selectedTab: TYPE_OUTCOME,
-            selectedCategory: null
+            selectedTab: (id && items[id]) ? categories[items[id].cid].type : TYPE_OUTCOME,
+            selectedCategory: ( id && items) ? categories[items[id].cid] : null
         }
     }
 
@@ -26,8 +26,13 @@ class Create extends React.Component {
     }
 
     submitFrom = (data, editMode) => {
-        this.props.actions.createItem(data, this.state.selectedCategory.id)
-        console.log(data)
+        if (editMode) {
+            // create
+            this.props.actions.createItem(data, this.state.selectedCategory.id)
+        } else {
+            // update
+            this.props.actions.updateItem(data, this.state.selectedCategory.id)
+        }
         this.props.history.push('/')
     }
 
@@ -42,20 +47,22 @@ class Create extends React.Component {
         const { id } = this.props.match.params
         const editItem = (id && items[id]) ? items[id] : {}
         const filterCategories = Object.keys(categories)
-              .map(id => {
-                  if (categories[id].type === selectedTab) {
-                      return categories[id]
-                  }
-                }).filter((e) => {return e})
+        .map(id => {
+            if (categories[id].type === selectedTab) {
+                return categories[id]
+            }})
+        .filter((e) => {return e})
+        const tabIndex = tabsText.findIndex(text => text === selectedTab)
+        console.log(selectedCategory)
 
         return (
             <div className="container py-3 px-5 align-items-center">
-                <Tabs activeIndex={0} onTabChange={this.tabChange}>
-                    <Tab>
-                        income
-                    </Tab>
+                <Tabs activeIndex={tabIndex} onTabChange={this.tabChange}>
                     <Tab>
                         outcome
+                    </Tab>
+                    <Tab>
+                        income
                     </Tab>
                 </Tabs>
                 <CategorySelect

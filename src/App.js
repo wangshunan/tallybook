@@ -32,8 +32,17 @@ class App extends Component {
         const newItem = { ...data, id: newId, cid: categoryId, category }
         this.setState({
           items: { ...this.state.items, [newId]: newItem }
-        }, () => {
-          console.log(this.state.items)
+        })
+      },
+      updateItem: (data, categoryId) => {
+        const modifedItem = {
+          ...data,
+          cid: categoryId,
+          timestamp: new Date(data.date).getTime()
+        }
+
+        this.setState({
+          items: { ...this.state.items, [modifedItem.id]: modifedItem }
         })
       }
     }
