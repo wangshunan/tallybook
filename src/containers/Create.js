@@ -15,8 +15,19 @@ class Create extends React.Component {
         const { categories, items } = props.data
         this.state = {
             selectedTab: (id && items[id]) ? categories[items[id].cid].type : TYPE_OUTCOME,
-            selectedCategory: ( id && items) ? categories[items[id].cid] : null
+            selectedCategory: ( id && items[id]) ? categories[items[id].cid] : null
         }
+    }
+
+    componentDidMount = () => {
+        const { id } = this.props.match.params
+        this.props.actions.getEditData(id).then(data => {
+            const { editItem, categories } = data
+            this.setState({
+                selectedTab: (id && editItem) ? categories[editItem.cid].type : TYPE_OUTCOME,
+                selectedCategory: (id && editItem) ? categories[editItem.cid] : null
+            })
+        })
     }
 
     tabChange = (index) => {
@@ -28,12 +39,14 @@ class Create extends React.Component {
     submitFrom = (data, editMode) => {
         if (editMode) {
             // create
-            this.props.actions.createItem(data, this.state.selectedCategory.id)
+            this.props.actions.createItem(data, this.state.selectedCategory.id).then(() => {
+                this.props.history.push('/')
+            })
         } else {
             // update
             this.props.actions.updateItem(data, this.state.selectedCategory.id)
+            this.props.history.push('/')
         }
-        this.props.history.push('/')
     }
 
     cancelSubmit = () => {
@@ -53,7 +66,6 @@ class Create extends React.Component {
             }})
         .filter((e) => {return e})
         const tabIndex = tabsText.findIndex(text => text === selectedTab)
-        console.log(selectedCategory)
 
         return (
             <div className="container py-3 px-5 align-items-center">

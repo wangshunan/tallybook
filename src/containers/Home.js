@@ -7,6 +7,7 @@ import {TAB_TEXT, TYPE_INCOME, parseToYearAndMonth, padLeft} from '../utility'
 import TotalPrice from '../components/TotalPrice';
 import MonthPicker from '../components/MonthPicker'
 import CreateBtn from '../components/CreateBtn'
+import Loader from '../components/Loader'
 import { Tabs, Tab } from '../components/Tabs'
 import { withRouter } from 'react-router-dom'
 
@@ -14,9 +15,12 @@ class Home extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            currentDate:parseToYearAndMonth(),
             tabView: TAB_TEXT[0]
         }
+    }
+
+    componentDidMount() {
+        this.props.actions.getInitalData()
     }
 
     changeView = (index) => {
@@ -26,9 +30,7 @@ class Home extends React.Component {
     }
 
     changeDate = (date) => {
-        this.setState({
-            currentDate: date
-        })
+        this.props.actions.selectNewMonth(date.year, date.month)
     }
 
     modifyItem = (id) => {
@@ -46,14 +48,12 @@ class Home extends React.Component {
     render() {
         let totalIncome = 0, totalOutcome = 0
         const { data } = this.props
-        const { items, categories } = data
-        const { currentDate, tabView } = this.state
+        const { items, categories, currentDate } = data
+        const { tabView } = this.state
         const itemsWithCategory = Object.keys(items).map(id => {
             items[id].category = categories[items[id].cid]
             return items[id]
-        }).filter(item => {
-            return item.date.includes(`${currentDate.year}-${padLeft(currentDate.month)}`)
-        })
+        })     
         itemsWithCategory.forEach(item => {
             if ( item.category.type === TYPE_INCOME ) {
                 totalIncome += item.price
@@ -81,6 +81,9 @@ class Home extends React.Component {
                     </div>
                 </div>
                 <div className="content-area py-3 px-3">
+                    { this.props.data.isLoading && 
+                        <Loader />
+                    }
                     <Tabs activeIndex={0} onTabChange={this.changeView}>
                         <Tab>
                             <Ionicon
