@@ -8,7 +8,7 @@ import { withRouter } from 'react-router-dom'
 import { TYPE_OUTCOME, TYPE_INCOME } from '../utility'
 
 const tabsText = [TYPE_OUTCOME, TYPE_INCOME]
-class Create extends React.Component {
+export class Create extends React.Component {
     constructor(props) {
         super(props)
         const { id } = props.match.params

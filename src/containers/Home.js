@@ -1,9 +1,10 @@
 import React from 'react'
 import WithContext from '../WithContext'
 import Ionicon from 'react-ionicons'
+import PieChart from '../components/PieChart'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Prilist from '../components/PriceList'
-import {TAB_TEXT, TYPE_INCOME, parseToYearAndMonth, padLeft} from '../utility'
+import { TAB_TEXT, TYPE_INCOME,TYPE_OUTCOME, generateChartDataByCategory } from '../utility'
 import TotalPrice from '../components/TotalPrice';
 import MonthPicker from '../components/MonthPicker'
 import CreateBtn from '../components/CreateBtn'
@@ -61,6 +62,8 @@ class Home extends React.Component {
                 totalOutcome += item.price
             }
         })
+        const chartOutcomDataByCategory = generateChartDataByCategory(itemsWithCategory, TYPE_OUTCOME)
+        const chartIncomeDataByCategory = generateChartDataByCategory(itemsWithCategory, TYPE_INCOME)
         return (
             <React.Fragment>
                 <header>
@@ -117,11 +120,20 @@ class Home extends React.Component {
                         />
                     }
                     { tabView === TAB_TEXT[1] &&
-                        <h1>图表模式</h1>
+                        <div className="container">
+                            <div className="row">
+                                <div className="col-md-6">
+                                    <PieChart title="本月收入" categoryData={chartIncomeDataByCategory}/>
+                                </div>
+                                <div className="col-md-6">
+                                    <PieChart title="本月支出" categoryData={chartOutcomDataByCategory}/>
+                                </div>
+                            </div>
+                        </div>
                     }
                     { tabView === TAB_TEXT[0] && itemsWithCategory.length === 0 &&
                         <div className="alert alert-light text-center no-record">
-                            您还没有任何记账记录
+                            还没有任何记账记录
                         </div>
                     }
                 </div>

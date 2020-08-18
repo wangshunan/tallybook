@@ -62,7 +62,7 @@ class MonthPicker extends React.Component {
         const { year, month } = this.props
         const { isOpen } = this.state
         const monthRange = range(12, 1)
-        const yearRange = range(9, -4).map(number => year + number)
+        const yearRange = range(10, -9).map(number => year + number)
 
         return (
             <div className="dropdown">
@@ -88,15 +88,20 @@ class MonthPicker extends React.Component {
                             )}
                             </div>
                             <div className="col mr-2 months-range"> 
-                            { monthRange.map((monthNumber, index) => 
-                                <a 
-                                className={ monthNumber === this.state.selectedMonth ? "dropdown-item active" : "dropdown-item" } 
-                                herf="#" 
-                                key={index}
-                                onClick={(e) => {this.selecteMonth(e, monthNumber)}}>
-                                    {padLeft(monthNumber)} 月
-                                </a>
-                            )}
+                            { monthRange.map((monthNumber, index) => {
+                                if ( ( this.state.selectedYear === this.props.year && (monthNumber * 1) <= this.props.month ) 
+                                    || this.state.selectedYear !== this.props.year ) {
+                                    return (
+                                        <a 
+                                        className={ monthNumber === this.state.selectedMonth ? "dropdown-item active" : "dropdown-item" } 
+                                        herf="#" 
+                                        key={index}
+                                        onClick={(e) => {this.selecteMonth(e, monthNumber)}}>
+                                            {padLeft(monthNumber)} 月
+                                        </a>
+                                    )
+                                }
+                            })}
                             </div>
                         </div>
                         

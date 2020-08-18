@@ -52,3 +52,19 @@ export const parseToYearAndMonth = (str) => {
         month: date.getMonth() + 1,
     }
 }
+export const generateChartDataByCategory = (items, type = TYPE_OUTCOME) => {
+    let categoryMap = { }
+    items.filter(item => item.category.type === type).forEach((item) => {
+        if (categoryMap[item.cid]) {
+            categoryMap[item.cid].value += (item.price * 1)
+            categoryMap[item.cid].items = [...categoryMap[item.cid].items, item.id]
+            } else {
+            categoryMap[item.cid] = {
+                name: item.category.name,
+                value: item.price * 1,
+                items: [item.id]
+            }
+        }
+    })
+    return Object.keys(categoryMap).map(mapKey => ({ ...categoryMap[mapKey] }))
+}
